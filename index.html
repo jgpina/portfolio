@@ -175,23 +175,43 @@
   .chap h3{ font-size:clamp(1.7rem,3.6vw,2.5rem); margin:6px 0 14px; font-weight:600; }
   .chap p{ font-size:1.06rem; max-width:54ch; color:var(--ink-soft); }
   .chap-side{ padding-top:4px; }
-  /* professional experience: vertical timeline */
-  .timeline{ position:relative; margin-top:10px; }
-  .timeline::before{ content:""; position:absolute; left:8px; top:8px; bottom:8px; width:2px; background:var(--line-g); border-radius:2px; }
-  .titem{ position:relative; padding-left:42px; padding-bottom:clamp(38px,5.5vw,58px); }
+  /* professional experience: centered alternating timeline */
+  .timeline{ position:relative; margin-top:16px; }
+  .timeline::before{ content:""; position:absolute; left:50%; width:2px; margin-left:-1px; top:8px; bottom:8px; background:var(--line-g); border-radius:2px; }
+  .titem{ position:relative; display:grid; grid-template-columns:1fr 1fr; column-gap:clamp(44px,6vw,84px); padding-bottom:clamp(40px,6vw,68px); align-items:start; }
   .titem:last-child{ padding-bottom:0; }
-  .titem::before{ content:""; position:absolute; left:1px; top:4px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:3px solid var(--green); box-shadow:0 0 0 4px var(--paper); }
-  .titem .logorow{ min-height:0; margin-bottom:10px; }
+  .titem::before{ content:""; position:absolute; left:50%; top:7px; width:13px; height:13px; margin-left:-6.5px; border-radius:50%; background:var(--green); box-shadow:0 0 0 5px var(--paper); z-index:1; }
+  .titem .tcontent{ grid-column:1; text-align:right; }
+  .titem .tmetrics{ grid-column:2; text-align:left; }
+  .titem:nth-child(even) .tcontent{ grid-column:2; text-align:left; }
+  .titem:nth-child(even) .tmetrics{ grid-column:1; text-align:right; }
+  .titem .logorow{ min-height:0; margin-bottom:10px; display:flex; gap:14px; align-items:center; justify-content:flex-end; }
+  .titem:nth-child(even) .logorow{ justify-content:flex-start; }
   .titem .cdate{ font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--ink); margin:0; }
-  .titem h3{ font-size:clamp(1.5rem,3.2vw,2.1rem); margin:5px 0 12px; font-weight:600; }
-  .titem p{ font-size:1.06rem; max-width:62ch; color:var(--ink-soft); }
-  .tstats{ display:flex; flex-wrap:wrap; gap:clamp(22px,4vw,46px); margin-top:18px; }
-  .tstat{ border-top:2px solid var(--green); padding-top:12px; min-width:120px; }
-  .tstat .big{ font-family:var(--display); font-weight:600; font-size:clamp(1.7rem,3.4vw,2.5rem); line-height:.96; color:var(--ink); letter-spacing:-.02em; }
+  .titem h3{ font-size:clamp(1.4rem,2.8vw,1.95rem); margin:5px 0 12px; font-weight:600; }
+  .titem p{ font-size:1.02rem; color:var(--ink-soft); }
+  .titem .skills{ margin-top:16px; }
+  .titem .chips{ justify-content:flex-end; }
+  .titem:nth-child(even) .chips{ justify-content:flex-start; }
+  .tstats{ display:flex; flex-direction:column; gap:22px; }
+  .tstat{ border-top:2px solid var(--green); padding-top:12px; display:inline-block; max-width:34ch; }
+  .titem:nth-child(even) .tmetrics .tstat{ margin-left:auto; }
+  .tstat .big{ font-family:var(--display); font-weight:600; font-size:clamp(1.8rem,3.6vw,2.6rem); line-height:.96; color:var(--ink); letter-spacing:-.02em; }
   .tstat .big .u{ color:var(--green); }
-  .tstat .cap{ font-size:.88rem; color:var(--stone); margin-top:8px; max-width:30ch; }
+  .tstat .cap{ font-size:.88rem; color:var(--stone); margin-top:8px; }
   .tstat .proj{ display:inline-block; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:var(--green); border:1px solid var(--green); border-radius:999px; padding:2px 9px; margin-right:8px; vertical-align:2px; }
-  .titem .skills{ margin-top:18px; }
+  @media (max-width:760px){
+    .timeline::before{ left:8px; margin-left:0; }
+    .titem{ display:block; padding-left:40px; padding-bottom:clamp(34px,8vw,48px); }
+    .titem::before{ left:2px; margin-left:0; top:5px; }
+    .titem .tcontent, .titem:nth-child(even) .tcontent,
+    .titem .tmetrics, .titem:nth-child(even) .tmetrics{ text-align:left; }
+    .titem .logorow, .titem:nth-child(even) .logorow{ justify-content:flex-start; }
+    .titem .chips, .titem:nth-child(even) .chips{ justify-content:flex-start; }
+    .titem:nth-child(even) .tmetrics .tstat{ margin-left:0; }
+    .titem .tmetrics{ margin-top:18px; }
+    .tstats{ flex-direction:row; flex-wrap:wrap; gap:24px; }
+  }
   /* moments strip (unified candid photos) */
   #moments .moments{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:clamp(26px,3.5vw,38px); }
   #moments figure{ margin:0; }
@@ -357,7 +377,7 @@
     <h2 class="reveal" style="--i:1">The part I loved was never the machines.</h2>
     <p class="reveal">I studied industrial engineering, but what pulled me in was never the factory floor. It was the people, and the moment a messy process turns into something that just <b>works</b>.</p>
     <p class="reveal" style="--i:1">I co-founded a startup and grew it to 5,000 users in under four months, owning the product end to end. The work I love lives in the in-between: where my "how will they feel" instinct meets a builder's "what is realistic", and together we land on something better than either of us imagined.</p>
-    <p class="reveal" style="--i:2">Now I work with AI. I get close to a business, learn how it really operates, find the opportunities, and design solutions that win back time and make the work more efficient and autonomous, then coordinate with the developers who build them.</p>
+    <p class="reveal" style="--i:2">Now I work with AI. I get close to a business, learn how it really operates, and find the opportunities to win back time and make the work more efficient and autonomous. I design those solutions, then coordinate the stakeholders who build them.</p>
     <p class="reveal last" style="--i:3">I am 25 and still finding the exact thing I will obsess over. But I know its shape: close to customers, close to a product, with people around me. When something genuinely moves me, I do not really stop thinking about it.</p>
   </div></section>
 
@@ -394,28 +414,34 @@
     <div class="block-label reveal"><span class="t">Professional experience</span><span class="rule"></span></div>
     <div class="timeline">
       <article class="titem reveal">
-        <div class="logorow"><img src="assets/logos/kaizen.svg" alt="Kaizen Institute"></div>
-        <div class="cdate">Aug 2023 to Aug 2024</div>
-        <h3>Lean consulting at Kaizen.</h3>
-        <p>Continuous-improvement work for industrial clients as a consultant at the Kaizen Institute. From supporting projects to leading the workshops and improvement events.</p>
-        <div class="tstats"><div class="tstat"><div class="big">&euro;1M<span class="u">+</span></div><div class="cap">contributed to EBITDA across the year, through the improvement projects.</div></div></div>
-        <div class="skills"><span class="sk">Skills</span><div class="chips"><span>Lean &amp; DMAIC</span><span>Continuous improvement</span><span>Workshops</span><span>Data-driven decisions</span></div></div>
+        <div class="tcontent">
+          <div class="logorow"><img src="assets/logos/kaizen.svg" alt="Kaizen Institute"></div>
+          <div class="cdate">Aug 2023 to Aug 2024</div>
+          <h3>Lean consulting at Kaizen.</h3>
+          <p>Continuous-improvement work for industrial clients as a consultant at the Kaizen Institute. From supporting projects to leading the workshops and improvement events.</p>
+          <div class="skills"><span class="sk">Skills</span><div class="chips"><span>Lean &amp; DMAIC</span><span>Continuous improvement</span><span>Workshops</span><span>Data-driven decisions</span></div></div>
+        </div>
+        <div class="tmetrics"><div class="tstats"><div class="tstat"><div class="big">&euro;1M<span class="u">+</span></div><div class="cap">contributed to EBITDA across the year, through the improvement projects.</div></div></div></div>
       </article>
       <article class="titem reveal" style="--i:1">
-        <div class="logorow"><img class="rewu" src="assets/logos/rewu.svg" alt="RewU"></div>
-        <div class="cdate">Feb 2025 to Nov 2025</div>
-        <h3>Co-founding RewU.</h3>
-        <p>Co-founded a rewards-for-attention platform and ran with it: the strategy, the go-to-market, and the partnerships. Owned the product end to end: the brand, the experience, and the full prototype, with the developer kept aligned to it.</p>
-        <div class="tstats"><div class="tstat"><div class="big">5,000<span class="u">+</span></div><div class="cap">users grown as co-founder, in about four months.</div></div><div class="tstat"><div class="big">50</div><div class="cap">partner companies brought on in the same window.</div></div></div>
-        <div class="skills"><span class="sk">Skills</span><div class="chips"><span>Strategy</span><span>Project management</span><span>Product &amp; UX</span><span>Partnerships &amp; go-to-market</span></div></div>
+        <div class="tcontent">
+          <div class="logorow"><img class="rewu" src="assets/logos/rewu.svg" alt="RewU"></div>
+          <div class="cdate">Feb 2025 to Nov 2025</div>
+          <h3>Co-founding RewU.</h3>
+          <p>Co-founded a rewards-for-attention platform and ran with it: the strategy, the go-to-market, and the partnerships. Owned the product end to end: the brand, the experience, and the full prototype, with the developer kept aligned to it.</p>
+          <div class="skills"><span class="sk">Skills</span><div class="chips"><span>Strategy</span><span>Project management</span><span>Product &amp; UX</span><span>Partnerships &amp; go-to-market</span></div></div>
+        </div>
+        <div class="tmetrics"><div class="tstats"><div class="tstat"><div class="big">5,000<span class="u">+</span></div><div class="cap">users grown as co-founder, in about four months.</div></div><div class="tstat"><div class="big">50</div><div class="cap">partner companies brought on in the same window.</div></div></div></div>
       </article>
       <article class="titem reveal" style="--i:2">
-        <div class="logorow"><img src="assets/logos/upgraide.png" alt="Upgraide"></div>
-        <div class="cdate">Dec 2025 to now</div>
-        <h3>AI transformation at Upgraide.</h3>
-        <p>Discovery and solution design for clients across sectors. I map each business, find where AI can win back time, and design the solution the stakeholders build.</p>
-        <div class="tstats"><div class="tstat"><div class="big">15<span class="u">h+</span></div><div class="cap">a week of manual work removed.</div></div><div class="tstat"><div class="big">~5<span class="u">mo</span></div><div class="cap"><span class="proj">Projected</span> payback on the solution.</div></div></div>
-        <div class="skills"><span class="sk">Skills</span><div class="chips"><span>Discovery &amp; solution design</span><span>Client relationship</span><span>ROI &amp; business cases</span><span>Strategic thinking</span></div></div>
+        <div class="tcontent">
+          <div class="logorow"><img src="assets/logos/upgraide.png" alt="Upgraide"></div>
+          <div class="cdate">Dec 2025 to now</div>
+          <h3>AI transformation at Upgraide.</h3>
+          <p>Discovery and solution design for clients across sectors. I map each business, find where AI can win back time, and design the solution the stakeholders build.</p>
+          <div class="skills"><span class="sk">Skills</span><div class="chips"><span>Discovery &amp; solution design</span><span>Client relationship</span><span>ROI &amp; business cases</span><span>Strategic thinking</span></div></div>
+        </div>
+        <div class="tmetrics"><div class="tstats"><div class="tstat"><div class="big">15<span class="u">h+</span></div><div class="cap">a week of manual work removed.</div></div><div class="tstat"><div class="big">~5<span class="u">mo</span></div><div class="cap"><span class="proj">Projected</span> payback on the solution.</div></div></div></div>
       </article>
     </div>
   </div></section>
