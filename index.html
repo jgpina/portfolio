@@ -142,8 +142,9 @@
   .block-label .t{ font-family:var(--sans); font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.14em; color:var(--green); }
   .block-label .rule{ flex:1; height:1px; background:var(--line); }
 
-  .logorow{ display:flex; align-items:center; gap:18px; min-height:40px; }
-  .logorow img{ height:26px; width:auto; filter:grayscale(100%) opacity(.55); transition:filter .35s var(--ease); }
+  .logorow{ display:flex; align-items:center; gap:18px; min-height:40px; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none; }
+  .logorow::-webkit-scrollbar{ display:none; }
+  .logorow img{ height:26px; width:auto; flex:none; filter:grayscale(100%) opacity(.55); transition:filter .35s var(--ease); }
   .logorow img.lg{ height:34px; }
   .logorow img.rewu{ height:46px; }
   .logorow img[alt="Natixis"]{ height:20px; }
@@ -162,6 +163,7 @@
   .edu-item h3{ font-size:1.3rem; font-weight:600; }
   .edu-item p{ font-size:.98rem; color:var(--ink-soft); margin-top:8px; }
   @media (max-width:760px){ .edu{ grid-template-columns:1fr; } }
+  @media (max-width:560px){ .hero h1{ font-size:2.45rem; line-height:1.08; max-width:13ch; } }
 
   /* work = full chapters, zig-zag */
   .arc{ display:flex; flex-direction:column; gap:clamp(46px,7vw,80px); margin-top:8px; }
