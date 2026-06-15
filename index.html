@@ -188,7 +188,11 @@
   .figure .cap{ font-size:.95rem; color:var(--stone); margin-top:10px; max-width:34ch; }
   .figure .proj{ display:inline-block; font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.1em; color:var(--green); border:1px solid var(--green); border-radius:999px; padding:2px 9px; margin-right:8px; vertical-align:2px; }
   .figure.two{ display:flex; flex-direction:column; gap:22px; }
-  @media (max-width:760px){ .chap,.chap:nth-child(even){ grid-template-columns:1fr; direction:ltr; gap:18px; } }
+  @media (max-width:760px){
+    .arc{ gap:0; }
+    .chap,.chap:nth-child(even){ grid-template-columns:1fr; direction:ltr; gap:18px; }
+    .chap + .chap{ border-top:1px solid var(--line); margin-top:clamp(32px,8vw,42px); padding-top:clamp(32px,8vw,42px); }
+  }
 
   /* how I work: green panel + stepper */
   #how{ background:linear-gradient(180deg, var(--lilac) 0%, var(--lilac-2) 100%); }
