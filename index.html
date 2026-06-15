@@ -104,11 +104,13 @@
   .marquee{ overflow:hidden;
     -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%);
     mask-image:linear-gradient(90deg,transparent 0,#000 8%,#000 92%,transparent 100%); }
-  .marquee-track{ display:flex; align-items:center; gap:clamp(36px,5vw,64px); width:max-content; animation:marq 36s linear infinite; }
+  .marquee-track{ display:flex; align-items:flex-start; gap:clamp(34px,4.5vw,58px); width:max-content; animation:marq 36s linear infinite; }
   .marquee:hover .marquee-track{ animation-play-state:paused; }
-  .marquee-track img{ height:30px; width:auto; filter:grayscale(100%) opacity(.5); transition:filter .4s var(--ease); flex:none; }
-  .marquee:hover .marquee-track img{ filter:grayscale(0) opacity(1); }
-  @media (hover:none){ .marquee-track img{ filter:grayscale(0) opacity(.92); } }
+  .marquee-track .tool{ display:flex; flex-direction:column; align-items:center; gap:10px; flex:none; }
+  .marquee-track .tool img{ height:30px; width:auto; filter:grayscale(100%) opacity(.5); transition:filter .4s var(--ease); }
+  .marquee-track .tool span{ font-size:11.5px; font-weight:500; color:var(--stone); white-space:nowrap; }
+  .marquee:hover .marquee-track .tool img{ filter:grayscale(0) opacity(1); }
+  @media (hover:none){ .marquee-track .tool img{ filter:grayscale(0) opacity(.92); } }
   @keyframes marq{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
   .hero .sub b{ color:var(--ink); font-weight:600; }
   .hero .cta{ display:flex; gap:14px; flex-wrap:wrap; margin-top:32px; }
@@ -223,8 +225,8 @@
   .pcard .view{ margin-top:auto; padding-top:18px; font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--green); display:inline-flex; gap:8px; align-items:center; }
   .pcard .view .arw{ transition:transform .22s var(--ease); }
   .pcard:hover .view .arw{ transform:translateX(5px); }
-  .pcard .teaser{ margin-top:12px; font-size:13.5px; font-weight:600; color:var(--ink); }
-  .pcard .teaser b{ color:var(--green); font-weight:700; }
+  .pcard .pco{ height:22px; width:auto; align-self:flex-start; margin-bottom:14px; filter:grayscale(100%) opacity(.5); transition:filter .35s var(--ease); }
+  .pcard:hover .pco{ filter:grayscale(0) opacity(1); }
   .nda{ margin-top:24px; font-size:14px; color:var(--stone); }
   @media (max-width:900px){ .pcards{ grid-template-columns:1fr; } }
 
@@ -345,7 +347,7 @@
     <span class="tools-label">Tools I work with</span>
     <div class="marquee" aria-label="Tools I work with">
       <div class="marquee-track">
-        <img src="assets/tools/claude.svg" alt="Claude"><img src="assets/tools/notion.svg" alt="Notion"><img src="assets/tools/figma.svg" alt="Figma"><img src="assets/tools/n8n.svg" alt="n8n"><img src="assets/tools/excel.svg" alt="Microsoft Excel"><img src="assets/tools/powerpoint.svg" alt="Microsoft PowerPoint"><img src="assets/tools/powerbi.svg" alt="Microsoft Power BI"><img src="assets/tools/powerautomate.svg" alt="Microsoft Power Automate"><img src="assets/tools/claude.svg" alt="" aria-hidden="true"><img src="assets/tools/notion.svg" alt="" aria-hidden="true"><img src="assets/tools/figma.svg" alt="" aria-hidden="true"><img src="assets/tools/n8n.svg" alt="" aria-hidden="true"><img src="assets/tools/excel.svg" alt="" aria-hidden="true"><img src="assets/tools/powerpoint.svg" alt="" aria-hidden="true"><img src="assets/tools/powerbi.svg" alt="" aria-hidden="true"><img src="assets/tools/powerautomate.svg" alt="" aria-hidden="true">
+        <div class="tool"><img src="assets/tools/claude.svg" alt="Claude"><span>Claude</span></div><div class="tool"><img src="assets/tools/notion.svg" alt="Notion"><span>Notion</span></div><div class="tool"><img src="assets/tools/figma.svg" alt="Figma"><span>Figma</span></div><div class="tool"><img src="assets/tools/n8n.svg" alt="n8n"><span>n8n</span></div><div class="tool"><img src="assets/tools/excel.svg" alt="Microsoft Excel"><span>Excel</span></div><div class="tool"><img src="assets/tools/powerpoint.svg" alt="Microsoft PowerPoint"><span>PowerPoint</span></div><div class="tool"><img src="assets/tools/powerbi.svg" alt="Microsoft Power BI"><span>Power BI</span></div><div class="tool"><img src="assets/tools/powerautomate.svg" alt="Microsoft Power Automate"><span>Power Automate</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/claude.svg" alt=""><span>Claude</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/notion.svg" alt=""><span>Notion</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/figma.svg" alt=""><span>Figma</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/n8n.svg" alt=""><span>n8n</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/excel.svg" alt=""><span>Excel</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/powerpoint.svg" alt=""><span>PowerPoint</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/powerbi.svg" alt=""><span>Power BI</span></div><div class="tool" aria-hidden="true"><img src="assets/tools/powerautomate.svg" alt=""><span>Power Automate</span></div>
       </div>
     </div>
   </div></section>
@@ -443,18 +445,21 @@
     <h2 class="reveal" style="--i:1">Problems mapped, solutions designed.</h2>
     <div class="pcards">
       <button class="pcard reveal" data-p="p1">
+        <img class="pco" src="assets/logos/upgraide.png" alt="Upgraide">
         <div class="kind">Customer experience</div>
         <h3>Lead response, automated</h3>
         <p>A customer-facing business was losing most of its leads in the first days. The fix: reach every one in minutes.</p>
         <span class="view">View case <span class="arw" aria-hidden="true">&rarr;</span></span>
       </button>
       <button class="pcard reveal" style="--i:1" data-p="p2">
+        <img class="pco" src="assets/logos/upgraide.png" alt="Upgraide">
         <div class="kind">Operations</div>
         <h3>Treasury and admin, streamlined</h3>
         <p>Manual treasury work was eating into every week. The fix: a platform to take it off the team's plate.</p>
         <span class="view">View case <span class="arw" aria-hidden="true">&rarr;</span></span>
       </button>
       <button class="pcard reveal" style="--i:2" data-p="p3">
+        <img class="pco" src="assets/logos/kaizen.svg" alt="Kaizen Institute">
         <div class="kind">Continuous improvement</div>
         <h3>A value chain, re-engineered</h3>
         <p>A full value-chain diagnostic for a plastics manufacturer, redesigned for efficiency and lower waste.</p>
